@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="card containerOpa">
+
+    <div class="card-header" style="padding: .75rem 1.25rem;">
+      <h3 style="position: absolute;top: 30px;">Categorías</h3>
+      <div class="row justify-content-end">
+        <div class="container justify-content-end">
+          <div class="row justify-content-end">
+            <div class="justify-content-end">
+              <div class="profile-header-img">
+                <img class="rounded-circle" src="{{userLogged.image}}" style="width: 65px;" />
+                <!-- badge -->
+                <div class="rank-label-container">
+                  <span class="label label-default rank-label">{{userLogged.user}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="row justify-content-end">
+        <div class="justify-content-end">
+          <div class="justify-content-end">
+            <button (click)="newCategory()" class="mr-2 btn btn-primary">Nueva</button>
+            <button (click)="goProducts()" class="btn btn-info">Productos</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5 col-md-12 container" style="overflow: hidden;">
+        <table class="table col-md-10" style="margin: 0px auto;">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Categoria</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categories">
+              <th scope="row">
+                <div class="form-group">
+                  <input [disabled]="category.id!=null && !category.edit" [(ngModel)]="category.name" type="text" class="form-control" id="category{{category.id}}"
+                    placeholder="Categoría" style="width: 100%;">
+                </div>
+              </th>
+              <td>
+                <div class="form-group">
+                  <input [disabled]="category.id!=null && !category.edit" [(ngModel)]="category.description" type="text" class="form-control" id="category{{category.id}}"
+                    placeholder="Descripción" style="width: 100%;">
+                </div>
+              </td>
+              <td>
+                <button (click)="editCategory(category)" type="button" class="btn btn-secondary" aria-label="Close">
+                  Editar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="saveCategories()">Guardar Categorías</button>
+    </div>
+
+  </div>
+</div>

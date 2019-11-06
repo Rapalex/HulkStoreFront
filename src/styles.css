@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+/**
+ * Profile image component
+ */
+
+ body{
+    background: url(https://c.wallhere.com/photos/61/57/The_Avengers_minimalism_Marvel_Cinematic_Universe_artwork-207568.jpg!d) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
+
+.containerOpa{
+        /*background-color:#95bc55 !important;*/
+        opacity:0.9;
+        filter:alpha(opacity=60);
+}
+
+.profile-header-container{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.profile-header-img > img.img-circle {
+    width: 120px;
+    height: 120px;
+    border: 2px solid #51D2B7;
+}
+
+.profile-header {
+    margin-top: 43px;
+}
+
+/**
+ * Ranking component
+ */
+.rank-label-container {
+    margin-top: -19px;
+    /* z-index: 1000; */
+    text-align: center;
+}
+
+.label.label-default.rank-label {
+    background-color: rgb(81, 210, 183);
+    padding: 5px 10px 5px 10px;
+    border-radius: 27px;
+    font-size: 7pt;
+}

@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="card containerOpa">
+
+    <div class="card-header" style="padding: .75rem 1.25rem;">
+      <h3 style="position: absolute;top: 30px;">Productos</h3>
+      <div class="row justify-content-end">
+        <div class="container justify-content-end">
+          <div class="row justify-content-end">
+            <div class="justify-content-end">
+              <div class="profile-header-img">
+                <img class="rounded-circle" src="{{userLogged.image}}" style="width: 65px;" />
+                <!-- badge -->
+                <div class="rank-label-container">
+                  <span class="label label-default rank-label">{{userLogged.user}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="row justify-content-end">
+        <div class="justify-content-end">
+          <div class="justify-content-end">
+                  <button (click)="newProduct()" class="mr-2 btn btn-primary">Nuevo</button>
+            <button (click)="goCategories()" class="btn btn-info">Categorias</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-5 col-md-12 container" style="overflow: hidden;">
+        <table class="table col-md-10" style="margin: 0px auto;">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Producto</th>
+              <th scope="col">Cantidad Entradas</th>
+              <th scope="col">Cantidad Salidas</th>
+              <th scope="col">Total Stock</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products">
+              <th scope="row">{{product.name}}</th>
+              <td>{{product.quantityRestockses}}</td>
+              <td>{{product.quantitySold}}</td>
+              <td>{{product.quantityInStock}}</td>
+              <td>{{product.price}}</td>
+              <td>
+                <button (click)="editProduct(product.id)" type="button" class="btn btn-secondary" aria-label="Close">
+                  Editar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>

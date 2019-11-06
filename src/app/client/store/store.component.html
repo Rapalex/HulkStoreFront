@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="card containerOpa">
+
+    <div class="card-header" style="padding: .75rem 1.25rem;">
+      <h3 style="position: absolute;top: 30px;">Hulk Store</h3>
+      <div class="row justify-content-end">
+        <div class="container justify-content-end">
+          <div class="row justify-content-end">
+            <div class="justify-content-end">
+              <div class="profile-header-img">
+                <img class="rounded-circle" src="{{userLogged.image}}" style="width: 65px;" />
+                <!-- badge -->
+                <div class="rank-label-container">
+                  <span class="label label-default rank-label">{{userLogged.user}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="row col-md-12 justify-content-center">
+        <div class="row btn-toolbar mb-3 col-md-12" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="input-group col-md-4">
+            <select (change)="searchProducts()" [(ngModel)]="productFilters.category" class="form-control mr-2">
+              <option value="0" selected>Categorias</option>
+              <option *ngFor="let category of categories" value="{{category.id}}" title="{{category.description}}">
+                {{category.name}}</option>
+            </select>
+          </div>
+          <div class="form-group mr-2 col-md-4">
+            <input (change)="searchProducts()" [(ngModel)]="productFilters.name" type="text" class="form-control"
+              id="exampleInputPassword1" placeholder="Nombre">
+          </div>
+        </div>
+
+        <div class="row">
+          <div *ngFor="let product of productsFiltered" class="card mt-2 ml-3 box" style="width: 18rem;">
+            <img src="{{product.image}}" class="card-img-top" alt="{{product.name}}">
+            <div class="card-body">
+              <h5 class="card-title">{{product.name}} - {{ product.price | currency}} COP</h5>
+              <p class="card-text">{{product.description}}</p>
+              <div style="position: absolute;
+            bottom: 11px;">
+                <a (click)="addProductToBuy(product.id)" class="btn btn-primary"
+                  style="cursor: pointer; color: white;">Agregar a la compra</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row mt-5">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Producto</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Valor</th>
+              <th scope="col">Total</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let productAdded of productsAdded">
+              <th scope="row">{{productAdded.name}}</th>
+              <td>
+                <div class="form-group">
+                  <input (change)="calculateTotals()" [(ngModel)]="productAdded.quantity" type="number" min="1"
+                    max="{{productAdded.quantityInStock}}" class="form-control" id="productQuantity{{productAdded.id}}"
+                    placeholder="Cantidad" style="width: 100%;">
+                </div>
+              </td>
+              <td>{{productAdded.price}}</td>
+              <td>{{productAdded.quantity * productAdded.price | currency}} COP</td>
+              <td><button (click)="removeProduct(productAdded.id)" type="button" class="close" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="productsAdded.length > 0">
+              <th scope="col"></th>
+              <th scope="col">Total Cantidad: {{totalQuantity}}</th>
+              <th scope="col"></th>
+              <th scope="col">Total: {{totalPrice | currency}} COP</th>
+              <th scope="col"></th>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="row" *ngIf="productsAdded.length > 0">
+        <button (click)="buyProducts()" class="btn btn-success">Comprar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
