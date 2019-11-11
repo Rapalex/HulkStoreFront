@@ -4,7 +4,7 @@ import { Messages } from './../model/Messages';
 import { Products } from './../model/Products';
 import { Categories } from './../model/Categories';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,38 +16,36 @@ export class ServiceService {
   Url = 'http://localhost:8080/';
 
   getCategories() {
-    return this.http.get<Categories[]>(this.Url + 'categories/getAllCategories');
+    return this.http.get<Categories[]>(this.Url + 'categories/getAllCategories?token=' + sessionStorage.getItem('token'));
   }
 
   getAllProducts() {
-    return this.http.get<Products[]>(this.Url + 'products/getAllProducts?store=true');
+    return this.http.get<Products[]>(this.Url + 'products/getAllProducts?store=true&token=' + sessionStorage.getItem('token'));
   }
 
   getAllProductsVendor() {
-    return this.http.get<Products[]>(this.Url + 'products/getAllProducts?store=false');
+    return this.http.get<Products[]>(this.Url + 'products/getAllProducts?store=false&token=' + sessionStorage.getItem('token'));
   }
 
   buyProducts(products: Products[]) {
-    return this.http.post<Messages>(this.Url + 'products/buyProducts', products);
+    return this.http.post<Messages>(this.Url + 'products/buyProducts?token=' + sessionStorage.getItem('token'), products);
   }
 
   saveProduct(product: Products) {
-    return this.http.post<Messages>(this.Url + 'products/saveProduct', product);
+    return this.http.post<Messages>(this.Url + 'products/saveProduct?token=' + sessionStorage.getItem('token'), product);
   }
 
   saveRestock(inventoryRestockses: InventoryRestockses[], product: Products) {
-    return this.http.post<Messages>(this.Url + 'products/saveRestock/' + product.id, inventoryRestockses);
+    return this.http.post<Messages>(this.Url + 'products/saveRestock/' + product.id + '?token=' + sessionStorage.getItem('token')
+    , inventoryRestockses);
   }
 
   saveCategories(categories: Categories[]) {
-    return this.http.post<Messages>(this.Url + 'categories/saveCategories', categories);
-  }
-
-  login(user: Users) {
-    return this.http.get<Users>(this.Url + 'login?user=' + user.user + '&password=' + user.password);
+    return this.http.post<Messages>(this.Url + 'categories/saveCategories?token=' + sessionStorage.getItem('token'), categories);
   }
 
   getProduct(id: number) {
-    return this.http.get<Products>(this.Url + 'products/getProduct/' + id);
+    return this.http.get<Products>(this.Url + 'products/getProduct/' + id + '?token=' + sessionStorage.getItem('token'));
   }
+
 }

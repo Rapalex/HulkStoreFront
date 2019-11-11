@@ -1,3 +1,5 @@
+import { Authorities } from './../../model/Authorities';
+import { AuthenticationService } from './../../Service/authentication.service';
 import { Users } from './../../model/Users';
 import { Router } from '@angular/router';
 import { ServiceService } from './../../Service/service.service';
@@ -11,34 +13,14 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   user: Users;
+  invalidLogin: boolean;
 
-  constructor(private service: ServiceService, private router: Router) { }
-
-
-  // Simulación de un login sin seguridad, solo para efectos de vista, 
-  // más no tiene funciones de seguridad
-  login() {
-    this.service.login(this.user)
-      .subscribe(data => {
-        if (data != null) {
-          this.user = data;
-          localStorage.setItem('currentUser', JSON.stringify(this.user));
-          alert('Bienvenido/a ' + this.user.name + ' ' + this.user.lastName);
-          if (this.user.category === 1) {
-            this.router.navigate(['listProducts']);
-          } else {
-            this.router.navigate(['store']);
-          }
-        } else {
-          alert('Usuario o contraseña incorrecto');
-        }
-      }, err => {
-        alert(err.message);
-      });
-  }
+  constructor(private service: ServiceService, private router: Router, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.user = {id: null,
+    this.invalidLogin = false;
+    this.user = {
+      id: null,
       image: '',
       name: '',
       lastName: '',
@@ -46,7 +28,11 @@ export class LoginComponent implements OnInit {
       user: '',
       category: null,
       password: '',
+      authority: null
     };
   }
 
+  login() {
+    this.authenticationService.authenticate(this.user.user, this.user.password);
+  }
 }

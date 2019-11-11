@@ -1,3 +1,5 @@
+import { AuthGaurdService } from './Service/auth-gaurd.service';
+import { LogoutComponent } from './index/logout/logout.component';
 import { ProductComponent } from './admon/product/product.component';
 import { LoginComponent } from './index/login/login.component';
 import { ListProductsComponent } from './admon/list-products/list-products.component';
@@ -9,12 +11,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  {path : 'store', component : StoreComponent},
-  {path : 'category', component : CategoryComponent},
-  {path : 'listCategories', component : ListCategoriesComponent},
-  {path : 'product', component : ProductComponent},
-  {path : 'listProducts', component : ListProductsComponent},
+  {path : 'store', component : StoreComponent, canActivate: [AuthGaurdService] },
+  {path : 'category', component : CategoryComponent, canActivate: [AuthGaurdService] },
+  {path : 'listCategories', component : ListCategoriesComponent, canActivate: [AuthGaurdService] },
+  {path : 'product', component : ProductComponent, canActivate: [AuthGaurdService]},
+  {path : 'listProducts', component : ListProductsComponent, canActivate: [AuthGaurdService]},
   {path : 'login', component : LoginComponent},
+  {path: 'logout', component: LogoutComponent, canActivate: [AuthGaurdService]},
   {path: '',   redirectTo: '/login', pathMatch: 'full' }
 ];
 

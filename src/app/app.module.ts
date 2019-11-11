@@ -1,3 +1,5 @@
+import { BasicAuthInterceptorService } from './Service/basic-auth-interceptor.service';
+import { LogoutComponent } from './index/logout/logout.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -12,7 +14,7 @@ import { CategoryComponent } from './admon/category/category.component';
 
 import {FormsModule} from '@angular/forms';
 import {ServiceService} from '../app/Service/service.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import {HttpClientModule} from '@angular/common/http';
     ListProductsComponent,
     ProductComponent,
     ListCategoriesComponent,
-    CategoryComponent
+    CategoryComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,10 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptorService, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

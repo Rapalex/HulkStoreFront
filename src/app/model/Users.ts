@@ -1,3 +1,4 @@
+import { Authorities } from './Authorities';
 export class Users {
     id: number;
     image: string;
@@ -7,4 +8,5 @@ export class Users {
     user: string;
     category: number;
     password: string;
+    authority: Authorities[];
 }

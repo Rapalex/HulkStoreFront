@@ -1,3 +1,4 @@
+import { AuthenticationService } from './Service/authentication.service';
 import { Users } from './model/Users';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,7 +12,7 @@ export class AppComponent {
   title = 'HulkStore';
   userLogged: Users;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public loginService: AuthenticationService) {
     this.userLogged = JSON.parse(localStorage.getItem('currentUser'));
   }
 
@@ -37,5 +38,9 @@ export class AppComponent {
 
   Login() {
     this.router.navigate(['login']);
+  }
+
+  Logout(){
+    this.router.navigate(['logout']);
   }
 }
