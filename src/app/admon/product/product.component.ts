@@ -73,6 +73,10 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  back() {
+    this.router.navigate(['listProducts']);
+  }
+
   ngOnInit() {
     this.restockesAdded = [new InventoryRestockses()];
     this.categorySelected = '';

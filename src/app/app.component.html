@@ -1,4 +1,4 @@
       <div class="row justify-content-end">
-        <button style="position: relative;left: -24px;" class="btn btn-danger" (click)="Logout()" *ngIf="loginService.isUserLoggedIn()">Salir</button>
+        <button style="position: relative;left: -24px;" class="btn btn-danger" (click)="Logout()" *ngIf="isLogged">Salir</button>
       </div>
       <router-outlet></router-outlet>

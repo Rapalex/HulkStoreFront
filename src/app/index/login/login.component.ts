@@ -1,3 +1,4 @@
+import { AppComponent } from './../../app.component';
 import { Authorities } from './../../model/Authorities';
 import { AuthenticationService } from './../../Service/authentication.service';
 import { Users } from './../../model/Users';
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   user: Users;
   invalidLogin: boolean;
 
-  constructor(private service: ServiceService, private router: Router, private authenticationService: AuthenticationService) { }
+  constructor(private service: ServiceService, private router: Router, private authenticationService: AuthenticationService, private appComponent: AppComponent) { }
 
   ngOnInit() {
     this.invalidLogin = false;
@@ -34,5 +35,6 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.authenticationService.authenticate(this.user.user, this.user.password);
+    this.appComponent.isLogged = true;
   }
 }

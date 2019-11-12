@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'HulkStore';
   userLogged: Users;
+  isLogged: boolean;
 
   constructor(private router: Router, public loginService: AuthenticationService) {
     this.userLogged = JSON.parse(localStorage.getItem('currentUser'));
@@ -40,7 +41,8 @@ export class AppComponent {
     this.router.navigate(['login']);
   }
 
-  Logout(){
+  Logout() {
+    this.isLogged = false;
     this.router.navigate(['logout']);
   }
 }
