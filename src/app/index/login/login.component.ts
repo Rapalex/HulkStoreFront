@@ -16,7 +16,10 @@ export class LoginComponent implements OnInit {
   user: Users;
   invalidLogin: boolean;
 
-  constructor(private service: ServiceService, private router: Router, private authenticationService: AuthenticationService, private appComponent: AppComponent) { }
+  constructor(private service: ServiceService,
+              private router: Router,
+              private authenticationService: AuthenticationService,
+              private appComponent: AppComponent) { }
 
   ngOnInit() {
     this.invalidLogin = false;
@@ -27,7 +30,6 @@ export class LoginComponent implements OnInit {
       lastName: '',
       email: '',
       user: '',
-      category: null,
       password: '',
       authority: null
     };

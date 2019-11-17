@@ -66,11 +66,13 @@ export class StoreComponent implements OnInit {
         if (message.status === 'ok') {
           location.reload();
         }
+      }, err => {
+        alert(err.error.message);
       });
   }
 
   ngOnInit() {
-    this.userLogged = JSON.parse(localStorage.getItem('currentUser'));
+    this.userLogged = JSON.parse(sessionStorage.getItem('currentUser'));
     this.productsAdded = [];
     this.productFilters = {name: '', category: 0};
     this.totalPrice = 0;
@@ -79,12 +81,16 @@ export class StoreComponent implements OnInit {
     this.service.getCategories()
       .subscribe(data => {
         this.categories = data;
+      }, err => {
+        alert(err.error.message);
       });
 
     this.service.getAllProducts()
       .subscribe(data => {
         this.products = data;
         this.productsFiltered = data;
+      }, err => {
+        alert(err.error.message);
       });
   }
 

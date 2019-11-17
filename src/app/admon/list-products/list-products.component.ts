@@ -1,3 +1,4 @@
+import { Messages } from './../../model/Messages';
 import { Users } from './../../model/Users';
 import { Products } from './../../model/Products';
 import { Router } from '@angular/router';
@@ -22,7 +23,7 @@ export class ListProductsComponent implements OnInit {
     this.router.navigate(['product']);
   }
 
-  newProduct(){
+  newProduct() {
     localStorage.removeItem( 'itemId');
     this.router.navigate(['product']);
   }
@@ -32,10 +33,12 @@ export class ListProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userLogged = JSON.parse(localStorage.getItem('currentUser'));
+    this.userLogged = JSON.parse(sessionStorage.getItem('currentUser'));
     this.service.getAllProductsVendor()
       .subscribe(data => {
         this.products = data;
+      }, err => {
+        alert(err.error.message);
       });
   }
 

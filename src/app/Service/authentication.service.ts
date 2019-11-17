@@ -1,3 +1,4 @@
+import { Messages } from './../model/Messages';
 import { Router } from '@angular/router';
 import { Categories } from './../model/Categories';
 import { Users } from './../model/Users';
@@ -20,7 +21,7 @@ export class AuthenticationService {
       .subscribe(data => {
         const userLog: Users = data.user;
         sessionStorage.setItem('username', username);
-        sessionStorage.setItem('currentUser', data.user);
+        sessionStorage.setItem('currentUser', JSON.stringify(data.user));
         const tokenStr = 'Bearer ' + data.token;
         sessionStorage.setItem('token', tokenStr);
         const authority = userLog.authority.filter(x => x.authority === 'ROLE_ADMIN');
@@ -30,7 +31,7 @@ export class AuthenticationService {
           this.router.navigate(['store']);
         }
       }, err => {
-        alert(err);
+        alert(err.error.message);
       });
   }
 

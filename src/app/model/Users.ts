@@ -6,7 +6,6 @@ export class Users {
     lastName: string;
     email: string;
     user: string;
-    category: number;
     password: string;
     authority: Authorities[];
 }

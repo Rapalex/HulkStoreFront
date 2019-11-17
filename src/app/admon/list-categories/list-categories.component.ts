@@ -38,16 +38,18 @@ export class ListCategoriesComponent implements OnInit {
       if (message.status === 'ok') {
         location.reload();
       }
-    }, err =>{
-      alert(err);
+    }, err => {
+      alert(err.error.message);
     });
   }
 
   ngOnInit() {
-    this.userLogged = JSON.parse(localStorage.getItem('currentUser'));
+    this.userLogged = JSON.parse(sessionStorage.getItem('currentUser'));
     this.service.getCategories()
       .subscribe(data => {
         this.categories = data;
+      }, err => {
+        alert(err.error.message);
       });
   }
 

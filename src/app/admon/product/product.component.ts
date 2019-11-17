@@ -48,8 +48,8 @@ export class ProductComponent implements OnInit {
       if (message.status === 'ok') {
         this.router.navigate(['listProducts']);
       }
-    }, err =>{
-      alert(err);
+    }, err => {
+      alert(err.error.message);
     });
   }
 
@@ -68,8 +68,8 @@ export class ProductComponent implements OnInit {
       if (message.status === 'ok') {
         this.router.navigate(['listProducts']);
       }
-    }, err =>{
-      alert(err);
+    }, err => {
+      alert(err.error.message);
     });
   }
 
@@ -82,7 +82,7 @@ export class ProductComponent implements OnInit {
     this.categorySelected = '';
     this.product = new Products();
     this.product.category = new Categories();
-    this.userLogged = JSON.parse(localStorage.getItem('currentUser'));
+    this.userLogged = JSON.parse(sessionStorage.getItem('currentUser'));
     this.idProduct = localStorage.getItem('itemId');
     if (this.idProduct) {
       this.saved = true;
@@ -94,6 +94,8 @@ export class ProductComponent implements OnInit {
     this.service.getCategories()
       .subscribe(data => {
         this.categories = data;
+      }, err => {
+        alert(err.error.message);
       });
   }
 

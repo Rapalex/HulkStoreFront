@@ -14,7 +14,6 @@ export class AppComponent {
   isLogged: boolean;
 
   constructor(private router: Router, public loginService: AuthenticationService) {
-    this.userLogged = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   Store() {
